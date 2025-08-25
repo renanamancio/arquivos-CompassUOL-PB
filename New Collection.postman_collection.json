@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "1d384663-a45c-4e66-915c-fe9e53a4b4dd",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://renan-henriqueba-6059498.postman.co/workspace/d979418d-ba3b-4bcc-ba15-b2c142a2de64/collection/47434408-1d384663-a45c-4e66-915c-fe9e53a4b4dd?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "Adicionar Animal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"category\": {\r\n    \"id\": 4,\r\n    \"name\": \"Roedores\"\r\n  },\r\n  \"name\": \"Bola de Pelo\",\r\n  \"photoUrls\": [\r\n    \"http://exemplo.com/fotos/bola_de_pelo.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 4,\r\n      \"name\": \"pequeno\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/pet",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Animal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 3,\r\n  \"category\": {\r\n    \"id\": 3,\r\n    \"name\": \"Passaros\"\r\n  },\r\n  \"name\": \"Severino\",\r\n  \"photoUrls\": [\r\n    \"http://exemplo.com/fotos/piu.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 3,\r\n      \"name\": \"cantor\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/pet",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Carregar Imagem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foto-ratin",
+							"type": "file",
+							"src": "/C:/Users/Ideapad/Pictures/hamster-1.jpg"
+						},
+						{
+							"key": "foto",
+							"value": "exemplo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/pet/4/uploadImage?additionalMetadata=foto-ratin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"4",
+						"uploadImage"
+					],
+					"query": [
+						{
+							"key": "additionalMetadata",
+							"value": "foto-ratin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Encontrar animais por status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"category\": {\r\n    \"id\": 4,\r\n    \"name\": \"Roedores\"\r\n  },\r\n  \"name\": \"Bola de Pelo\",\r\n  \"photoUrls\": [\r\n    \"http://exemplo.com/fotos/bola_de_pelo.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 4,\r\n      \"name\": \"pequeno\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/pet/findByStatus?status=sold",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "sold"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Encontrar animais por tag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/findByTags?tags=cute",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"findByTags"
+					],
+					"query": [
+						{
+							"key": "tags",
+							"value": "cute"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Encontrar animais por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Animal",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/pet/5",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pet",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Usuário",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 98,\r\n  \"username\": \"Carlito\",\r\n  \"firstName\": \"Carlito\",\r\n  \"lastName\": \"Tévez\",\r\n  \"email\": \"carll@gmail.com\",\r\n  \"password\": \"12345*sf\",\r\n  \"phone\": \"61954865248\",\r\n  \"userStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar lista de usuarios",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 791191,\r\n  \"username\": \"Carlita\",\r\n  \"firstName\": \"Carlita\",\r\n  \"lastName\": \"Tévez\",\r\n  \"email\": \"carlla@gmail.com\",\r\n  \"password\": \"12345*tf\",\r\n  \"phone\": \"61955865248\",\r\n  \"userStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/createWithList",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"createWithList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 18,\r\n  \"username\": \"example\",\r\n  \"firstName\": \"Mulan\",\r\n  \"lastName\": \"James\",\r\n  \"email\": \"mulan@email.com\",\r\n  \"password\": \"12345dv\",\r\n  \"phone\": \"61995523648\",\r\n  \"userStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/joao",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"joao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter usuário por nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user/joao",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"joao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir usuário",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user/jamesJohn",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"jamesJohn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logar Usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user?username=james&password=12345",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "james"
+						},
+						{
+							"key": "password",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazer pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 9,\r\n  \"petId\": 2,\r\n  \"quantity\": 7,\r\n  \"shipDate\": \"2025-08-08T20:19:07.753Z\",\r\n  \"status\": \"approved\",\r\n  \"complete\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/store/order",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir compra",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/store/order/10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventário animal status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/store/inventory",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"store",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Localizar pedido compra",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/store/order/9",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

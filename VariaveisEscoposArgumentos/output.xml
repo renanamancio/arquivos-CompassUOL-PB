@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-08-28T18:32:13.446930" rpa="false" schemaversion="5">
+<suite id="s1" name="NovoTeste3" source="c:\Users\Ideapad\Documents\Compass UOL\VariaveisEscoposArgumentos\NovoTeste3.robot">
+<test id="s1-t1" name="Imprimindo um e-mail customizado e aleatório" line="8">
+<kw name="Criar e-mail customizado e aleatório">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-08-28T18:32:13.928387" level="INFO">${ALEATORIA} = 3thtiFyt</msg>
+<var>${ALEATORIA}</var>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-08-28T18:32:13.928019" elapsed="1.733683"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-08-28T18:32:15.662588" level="INFO">${EMAIL_FINAL} = MayFernandes3thtiFyt@testerobot.com</msg>
+<var>${EMAIL_FINAL}</var>
+<arg>${NOME}${SOBRENOME}${ALEATORIA}@testerobot.com</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-08-28T18:32:15.662152" elapsed="0.000597"/>
+</kw>
+<return>
+<value>${EMAIL_FINAL}</value>
+<status status="PASS" start="2025-08-28T18:32:15.662892" elapsed="0.001386"/>
+</return>
+<msg time="2025-08-28T18:32:15.664737" level="INFO">${EMAIL_CRIADO} = MayFernandes3thtiFyt@testerobot.com</msg>
+<var>${EMAIL_CRIADO}</var>
+<arg>${PESSOA.nome}</arg>
+<arg>${PESSOA.sobrenome}</arg>
+<status status="PASS" start="2025-08-28T18:32:13.925924" elapsed="1.738989"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${EMAIL_CRIADO}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-28T18:32:15.665576" elapsed="0.000483"/>
+</kw>
+<status status="PASS" start="2025-08-28T18:32:13.924350" elapsed="1.742294"/>
+</test>
+<status status="PASS" start="2025-08-28T18:32:13.506897" elapsed="2.161449"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="NovoTeste3" id="s1" pass="1" fail="0" skip="0">NovoTeste3</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-08-28T18:32:12.845990" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\VariaveisEscoposArgumentos\NovoTeste3.robot' on line 18: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+</errors>
+</robot>

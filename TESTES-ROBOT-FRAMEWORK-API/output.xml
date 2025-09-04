@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-09-04T14:20:10.887836" rpa="false" schemaversion="5">
+<suite id="s1" name="Api Testing Booking" source="c:\Users\Ideapad\Documents\Compass UOL\TESTES-ROBOT-FRAMEWORK-API\tests\api_testing_booking.robot">
+<test id="s1-t1" name="Cenário 01: Verificar se a API está em execução" line="6">
+<kw name="Criar Sessão" owner="api_testing_booking">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-04T14:20:11.504946" level="INFO">Creating Session using : alias=API-Reservas, url=https://restful-booker.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>alias=API-Reservas</arg>
+<arg>url=https://restful-booker.herokuapp.com</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-04T14:20:11.504626" elapsed="0.012872"/>
+</kw>
+<status status="PASS" start="2025-09-04T14:20:11.502886" elapsed="0.015079"/>
+</kw>
+<kw name="PING" owner="api_testing_booking">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-04T14:20:12.367894" level="INFO">GET Request : url=https://restful-booker.herokuapp.com/ping 
+ path_url=/ping 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-04T14:20:12.368307" level="INFO">GET Response : url=https://restful-booker.herokuapp.com/ping 
+ status=201, reason=Created 
+ headers={'Content-Length': '7', 'Content-Type': 'text/plain; charset=utf-8', 'Date': 'Thu, 04 Sep 2025 17:20:12 GMT', 'Etag': 'W/"7-rM9AyJuqT6iOan/xHh+AW+7K/T8"', 'Nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'Report-To': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=4f06epjxc73l1BeBT5TTeAqi3oqhtvz5ow0pPn1E7oc%3D\\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\\u0026ts=1757006412"}],"max_age":3600}', 'Reporting-Endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=4f06epjxc73l1BeBT5TTeAqi3oqhtvz5ow0pPn1E7oc%3D&amp;sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&amp;ts=1757006412"', 'Server': 'Heroku', 'Via': '1.1 heroku-router', 'X-Powered-By': 'Express'} 
+ body=Created 
+ </msg>
+<msg time="2025-09-04T14:20:12.368560" level="INFO">C:\Users\Ideapad\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'restful-booker.herokuapp.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-04T14:20:12.370779" level="INFO">${resposta} = &lt;Response [201]&gt;</msg>
+<var>${resposta}</var>
+<arg>API-Reservas</arg>
+<arg>/ping</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-04T14:20:11.520060" elapsed="0.851129"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-09-04T14:20:12.372715" level="INFO">${resposta} = &lt;Response [201]&gt;</msg>
+<arg>${resposta}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-09-04T14:20:12.371810" elapsed="0.001271"/>
+</kw>
+<status status="PASS" start="2025-09-04T14:20:11.519060" elapsed="0.854386"/>
+</kw>
+<kw name="Checar Status Code &quot;201&quot;" owner="api_testing_booking" source_name="Checar Status Code &quot;${status_code}&quot;">
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>${status_code}</arg>
+<arg>${resposta}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-04T14:20:12.377769" elapsed="0.000839"/>
+</kw>
+<status status="PASS" start="2025-09-04T14:20:12.376802" elapsed="0.002159"/>
+</kw>
+<status status="PASS" start="2025-09-04T14:20:11.501338" elapsed="0.881400"/>
+</test>
+<status status="PASS" start="2025-09-04T14:20:10.903574" elapsed="1.485185"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Api Testing Booking" id="s1" pass="1" fail="0" skip="0">Api Testing Booking</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

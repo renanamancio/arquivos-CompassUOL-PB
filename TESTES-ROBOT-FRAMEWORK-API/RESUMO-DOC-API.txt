@@ -1,0 +1,232 @@
+RESTFUL-BOOKER
+Documentação: https://restful-booker.herokuapp.com/apidoc/index.html
+URL: https://restful-booker.herokuapp.com
+
+Keywords necessárias:
+    -Criar Sessão
+    -Gerar token (para PUT e DELETE)
+    -Checagem de STATUS CODE
+PING
+
+-Verificar se a API está em execução
+	-GET
+	-/ping
+	-Success 200
+	-Response: 201 Created
+
+AUTENTICAÇÃO
+
+-Criar Token
+	-POST
+	-/auth
+	-Cria token para acessar os métodos PUT e DELETE /booking
+	-Headers:
+		-'Content-Type: application/json'
+	-Body:
+		-'{
+    		"username" : "admin",
+    		"password" : "password123"
+		}'
+	-username tem que ser STRING, valor padrão 'admin'
+	-password tem que ser STRING, valor padrão 'password123'
+	-Success 200
+		-Gera um token do tipo STRING
+		-Response: {
+   			 "token": "abc123"
+			}
+
+BOOKING
+
+-Retornar todos os IDs
+	-GET
+	-Todos os IDs: /booking
+	-Opcional: Filtro por nome e spbrenome: /booking?firstname=sally&lastname=brown
+	-Opcional: Filtro por data de checkin e checkout: /booking?checkin=2014-03-13&checkout=2014-05-21
+	-firstname tem que ser string, retorna reservas com nome específico
+	-lastname tem que ser string, retorna reservas com sobrenome específico
+	-checkin tem que ser date (CCYY-MM-DD), retorna reservas com data de checkin maior ou igual.
+	-checkout tem que ser date (CCYY-MM-DD), retorna reservas com data de checkout maior ou igual.
+	-Success 200
+	-Response:
+		-[
+		  {
+  		  "bookingid": 1
+ 		 },
+ 		 {
+   		 "bookingid": 2
+ 		 },
+ 		 {
+ 		   "bookingid": 3
+ 		 },
+ 		 {
+  		  "bookingid": 4
+ 		 }
+		]
+
+-Retornar reserva específica pelo ID
+	-GET
+	-/booking/{id}
+	-Headers:
+		-valor padrão application/json
+	-id tem que ser string
+	-Success 200
+		-firstname STRING
+		-lastname STRING
+		-totalprice NUMBER
+		-depositpaid BOOLEAN
+		-bookingdates OBJECT
+		-checkin DATE
+		-checkout DATE
+		-additionalneeds STRING
+	-Response:
+		-{
+   		 "firstname": "Sally",
+    		"lastname": "Brown",
+    		"totalprice": 111,
+   		 "depositpaid": true,
+   		 "bookingdates": {
+       		 "checkin": "2013-02-23",
+       		 "checkout": "2014-10-23"
+    		},
+ 		   "additionalneeds": "Breakfast"
+		}
+
+-Criar uma nova reserva
+	-POST
+	-/booking
+	-Headers:
+		-'Content-Type: application/json'
+	-Body
+		'{
+   		 "firstname" : "Jim",
+  		 "lastname" : "Brown",
+		 "totalprice" : 111,
+		 "depositpaid" : true,
+  		 "bookingdates" : {
+       		 	"checkin" : "2018-01-01",
+     			"checkout" : "2019-01-01"
+    			},
+  		  "additionalneeds" : "Breakfast"
+		}'
+	-Requisitos do BODY
+		-firstname STRING
+		-lastname STRING
+		-totalprice NUMBER
+		-depositpaid BOOLEAN
+		-bookingdates OBJECT
+		-checkin DATE
+		-checkout DATE
+		-additionalneeds STRING
+	-Success 200
+	-Response
+		{
+   		 "bookingid": 1,
+  		 "booking": {
+    			 "firstname": "Jim",
+     		 	"lastname": "Brown",
+   		 	"totalprice": 111,
+     		 	"depositpaid": true,
+     		 	"bookingdates": {
+          			"checkin": "2018-01-01",
+         			"checkout": "2019-01-01"
+        		},
+     		  	 "additionalneeds": "Breakfast"
+    			}
+		}
+
+-Editar uma reserva
+	-PUT
+	-/booking/{id}
+	-Exigência do token
+	-Headers:
+		-'Content-Type: application/json'
+ 		 -'Accept: application/json'
+ 		 -'Cookie: token=abc123'
+	-Body
+		'{
+    		"firstname" : "James",
+    		"lastname" : "Brown",
+    		"totalprice" : 111,
+    		"depositpaid" : true,
+    		"bookingdates" : {
+        		"checkin" : "2018-01-01",
+        		"checkout" : "2019-01-01"
+    		},
+    		"additionalneeds" : "Breakfast"
+		}'
+	-Requisitos do BODY
+		-firstname STRING
+		-lastname STRING
+		-totalprice NUMBER
+		-depositpaid BOOLEAN
+		-bookingdates OBJECT
+		-checkin DATE
+		-checkout DATE
+		-additionalneeds STRING
+	-Success 200
+	-Response
+		{
+   		 "bookingid": 1,
+  		 "booking": {
+    			 "firstname": "Jim",
+     		 	"lastname": "Brown",
+   		 	"totalprice": 111,
+     		 	"depositpaid": true,
+     		 	"bookingdates": {
+          			"checkin": "2018-01-01",
+         			"checkout": "2019-01-01"
+        		},
+     		  	 "additionalneeds": "Breakfast"
+    			}
+		}
+
+-Editar parcialmente uma reserva
+	-PATCH
+	-/booking/{id}
+	-Exigência do token
+	-Headers:
+		-'Content-Type: application/json'
+ 		 -'Accept: application/json'
+ 		 -'Cookie: token=abc123'
+	-Body
+		'{
+    		"firstname" : "James",
+    		"lastname" : "Brown",
+		}'
+	-Requisitos do BODY
+		-firstname STRING
+		-lastname STRING
+		-totalprice NUMBER
+		-depositpaid BOOLEAN
+		-bookingdates OBJECT
+		-checkin DATE
+		-checkout DATE
+		-additionalneeds STRING
+	-Success 200
+	-Response
+		{
+   		 "bookingid": 1,
+  		 "booking": {
+    			 "firstname": "James",
+     		 	"lastname": "Brown",
+   		 	"totalprice": 111,
+     		 	"depositpaid": true,
+     		 	"bookingdates": {
+          			"checkin": "2018-01-01",
+         			"checkout": "2019-01-01"
+        		},
+     		  	 "additionalneeds": "Breakfast"
+    			}
+		}
+
+-Excluir uma reserva
+	-DELETE
+	-/booking/{id}
+	-Header com cookie:
+		-'Content-Type: application/json'
+		-'Cookie: token=abc123'
+	-Header com basic auth:
+		-'Content-Type: application/json'
+		-'Authorization: Basic YWRtaW46cGFzc3dvcmQxMjM='
+	-Success 200
+	-Response: 201 Created

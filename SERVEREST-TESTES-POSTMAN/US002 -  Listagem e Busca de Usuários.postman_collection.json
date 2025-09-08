@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "4a5a416d-b36f-48cc-8c73-9cdab3594a6b",
+		"name": "US002 -  Listagem e Busca de Usuários",
+		"description": "Objetivo: Validar a correta listagem e busca de usuários cadastrados, garantindo a Adequação  \nFuncional (Completude, Corretude) e Eficiência de Desempenho (Comportamento de Tempo).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://renan-henriqueba-6059498.postman.co/workspace/SERVEREST~d979418d-ba3b-4bcc-ba15-b2c142a2de64/collection/47434408-4a5a416d-b36f-48cc-8c73-9cdab3594a6b?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "Listar  todos  os  usuários  cadastrados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"const schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+							"  \"title\": \"Schema de Lista de Usuários\",\r",
+							"  \"description\": \"Schema para representar uma lista de usuários retornada pela API, incluindo a contagem total.\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"quantidade\": {\r",
+							"      \"description\": \"O número total de usuários retornados na lista.\",\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"usuarios\": {\r",
+							"      \"description\": \"A lista contendo os objetos de usuário.\",\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"          \"nome\": {\r",
+							"            \"description\": \"Nome completo do usuário.\",\r",
+							"            \"type\": \"string\",\r",
+							"            \"example\": \"Fulano da Silva\"\r",
+							"          },\r",
+							"          \"email\": {\r",
+							"            \"description\": \"Endereço de e-mail do usuário.\",\r",
+							"            \"type\": \"string\",\r",
+							"            \"format\": \"email\"\r",
+							"          },\r",
+							"          \"password\": {\r",
+							"            \"description\": \"Senha do usuário. (Observação: este campo geralmente não é exposto em respostas de API).\",\r",
+							"            \"type\": \"string\"\r",
+							"          },\r",
+							"          \"administrador\": {\r",
+							"            \"description\": \"Indica se o usuário é administrador. O valor é uma string, não um booleano.\",\r",
+							"            \"type\": \"string\",\r",
+							"            \"enum\": [\"true\", \"false\"]\r",
+							"          },\r",
+							"          \"_id\": {\r",
+							"            \"description\": \"O identificador único do usuário.\",\r",
+							"            \"type\": \"string\"\r",
+							"          }\r",
+							"        },\r",
+							"        \"required\": [\r",
+							"          \"nome\",\r",
+							"          \"email\",\r",
+							"          \"password\",\r",
+							"          \"administrador\",\r",
+							"          \"_id\"\r",
+							"        ]\r",
+							"      }\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"quantidade\",\r",
+							"    \"usuarios\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Validação do corpo da resposta\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Admin Teste\",\r\n  \"email\": \"admin.teste@example.com\",\r\n  \"password\": \"admin123\",\r\n  \"administrador\": \"true\"\r\n}"
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(TIRAR) Listar  usuários  quando não  há  nenhum  usuário  cadastrado",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar  usuári  o por  ID  válido",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar  usuári  o por  ID  inexist  ente",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar  usuári  o por  ID com  format  o  inválid  o",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

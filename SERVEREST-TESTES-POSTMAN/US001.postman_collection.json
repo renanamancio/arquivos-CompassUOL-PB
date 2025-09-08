@@ -1,0 +1,607 @@
+{
+	"info": {
+		"_postman_id": "726d37ac-2c87-4044-accd-4116e58af675",
+		"name": "US001",
+		"description": "**Objetivo: Validar o cadastro bem-sucedido de novos usuários com dados válidos e a rejeição de cadastros com dados inválidos ou duplicados, garantindo a Adequação Funcional (Completude, Corretude, Apropriabilidade) e Segurança (Confidencialidade, Integridade).**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://renan-henriqueba-6059498.postman.co/workspace/SERVEREST~d979418d-ba3b-4bcc-ba15-b2c142a2de64/collection/47434408-726d37ac-2c87-4044-accd-4116e58af675?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "CT001 - Cadastrar Usuário Comum Válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"const schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+							"  \"title\": \"Schema de Resposta de Sucesso\",\r",
+							"  \"description\": \"Schema para uma resposta padrão de sucesso da API após a criação de um novo recurso.\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"description\": \"Mensagem de feedback para o usuário, indicando o resultado da operação.\",\r",
+							"      \"type\": \"string\",\r",
+							"      \"example\": \"Cadastro realizado com sucesso\"\r",
+							"    },\r",
+							"    \"_id\": {\r",
+							"      \"description\": \"O identificador único do recurso que foi criado.\",\r",
+							"      \"type\": \"string\",\r",
+							"      \"example\": \"jogfODIlXsqxNFS2\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\",\r",
+							"    \"_id\"\r",
+							"  ]\r",
+							"};\r",
+							"pm.test(\"Validação do corpo da resposta\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Usuário Teste\",\r\n  \"email\": \"usuario.teste@example.com\",\r\n  \"password\": \"senha123\",\r\n  \"administrador\": \"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT002 - Cadastrar Usuário Administrador Válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"const schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+							"  \"title\": \"Schema de Resposta de Sucesso\",\r",
+							"  \"description\": \"Schema para uma resposta padrão de sucesso da API após a criação de um novo recurso.\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"description\": \"Mensagem de feedback para o usuário, indicando o resultado da operação.\",\r",
+							"      \"type\": \"string\",\r",
+							"      \"example\": \"Cadastro realizado com sucesso\"\r",
+							"    },\r",
+							"    \"_id\": {\r",
+							"      \"description\": \"O identificador único do recurso que foi criado.\",\r",
+							"      \"type\": \"string\",\r",
+							"      \"example\": \"jogfODIlXsqxNFS2\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\",\r",
+							"    \"_id\"\r",
+							"  ]\r",
+							"};\r",
+							"pm.test(\"Validação do corpo da resposta\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Admin Teste\",\r\n  \"email\": \"admin.teste@example.com\",\r\n  \"password\": \"admin123\",\r\n  \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT003 - Tentar cadastrar usuário com e-mail já utilizado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Admin Teste\",\r\n  \"email\": \"admin.teste@example.com\",\r\n  \"password\": \"admin123\",\r\n  \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT004 - Tentar cadastrar usuário com e-mail inválido (sem @)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Inválido\",\r\n      \"email\": \"emailinvalido.com\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT005 - Tentar cadastrar usuário com e-mail inválido (sem domínio)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Inválido\",\r\n      \"email\": \"emailinvalido@\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT006 - Tentar cadastrar usuário com e-mail de provedor gmail.com",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Gmail\",\r\n      \"email\": \"teste@gmail.com\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT007 - Tentar cadastrar usuário com e-mail de provedor hotmail.com",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n      \"nome\": \"Usuário Hotmail\",\r\n      \"email\": \"teste@hotmail.com\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT008 - Tentar cadastrar usuário com senha menor que 5 caracteres",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Senha Curta\",\r\n      \"email\": \"curta@example.com\",\r\n      \"password\": \"1234\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT009 - Tentar cadastrar usuário com senha maior que 10 caracteres",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Senha Longa\",\r\n      \"email\": \"longa@example.com\",\r\n      \"password\": \"12345678901\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT010 - Tentar cadastrar usuário com campo nome vazio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"\",\r\n      \"email\": \"vazio@example.com\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT011 - Tentar cadastrar usuário com campo email vazio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Vazio\",\r\n      \"email\": \"\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT012 - Tentar cadastrar usuário com campo password vazio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Vazio\",\r\n      \"email\": \"vazio2@example.com\",\r\n      \"password\": \"\",\r\n      \"administrador\": \"false\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CT013 - Tentar cadastrar usuário com campo administrador inválido (não booleano)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"nome\": \"Usuário Inválido\",\r\n      \"email\": \"invalido@example.com\",\r\n      \"password\": \"senha123\",\r\n      \"administrador\": \"string\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

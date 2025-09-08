@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "fab5be7c-6854-49e9-bf63-d7a994988d37",
+		"name": "Atualização de usuário",
+		"description": "Objetivo: Validar a atualização de dados de usuários existentes e a criação de novos usuários via PUT quando o ID não existe, garantindo a Adequação Funcional (Corretude, Completude) e Segurança (Integridade).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://renan-henriqueba-6059498.postman.co/workspace/SERVEREST~d979418d-ba3b-4bcc-ba15-b2c142a2de64/collection/47434408-fab5be7c-6854-49e9-bf63-d7a994988d37?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "Tentar  atualiz  ar  usuári  o com  e-mail  já  utilizad  o por  outro  usuári  o",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Fulano da Costa\",\r\n  \"email\": \"renan4@gmail.com\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios/30A82NawejHDw74v",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios",
+						"30A82NawejHDw74v"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar  novo  usuári  o via  PUT  com ID  inexist  ente",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiz  ar  dados  de  usuári  o  existen  te com  sucess  o",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"const schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+							"  \"title\": \"Schema de Mensagem de Confirmação\",\r",
+							"  \"description\": \"Schema para uma resposta de sucesso que retorna apenas uma mensagem de confirmação. Ideal para operações de alteração (PUT/PATCH) ou exclusão (DELETE).\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"message\": {\r",
+							"      \"description\": \"Mensagem confirmando que a operação foi realizada com sucesso.\",\r",
+							"      \"type\": \"string\",\r",
+							"      \"examples\": [\r",
+							"        \"Registro alterado com sucesso\",\r",
+							"        \"Registro excluído com sucesso\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"message\"\r",
+							"  ]\r",
+							"}\r",
+							"pm.test(\"Validação do corpo da resposta\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Fulano\",\r\n  \"email\": \"alterado@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios/ab0uxuPY0cbmQhpEz1",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios",
+						"ab0uxuPY0cbmQhpEz1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

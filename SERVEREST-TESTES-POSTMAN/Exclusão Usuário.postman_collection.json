@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "ae02c3b1-2b73-45ea-895c-ff786fb70b54",
+		"name": "Exclusão Usuário",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://renan-henriqueba-6059498.postman.co/workspace/SERVEREST~d979418d-ba3b-4bcc-ba15-b2c142a2de64/collection/47434408-ae02c3b1-2b73-45ea-895c-ff786fb70b54?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "Excluir usuário existente com sucesso",
+			"request": {
+				"method": "DELETE",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Tentar excluir usuário inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Fulano da Costa\",\r\n  \"email\": \"renan4@gmail.com\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}"
+				},
+				"url": {
+					"raw": "{{servidor}}/usuarios/30A82NawejHDw777",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"usuarios",
+						"30A82NawejHDw777"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,4 +1,0 @@
-Request Id: 4bc5e4ad-3bd0-42b2-86de-d78bc4a57900
-Correlation Id: ba72754f-0e11-46be-8461-b9b3d5e85ba0
-Timestamp: 2025-07-09T19:24:00Z
-Message: AADSTS50105: Your administrator has configured the application AWS (Skill Builder) ('373dd31d-f158-4ed2-a025-a819063bc22e') to block users unless they are specifically granted ('assigned') access to the application. The signed in user 'renan.batista.pb@compass.uol' is blocked because they are not a direct member of a group with access, nor had access directly assigned by an administrator. Please contact your administrator to assign access to this application.

@@ -1,0 +1,122 @@
+[
+  {
+    "nome": "Usuario Teste1",
+    "email": "usuario1@dominio.com",
+    "password": "teste123",
+    "administrador": "false"
+  },
+  {
+    "nome": "Fulano da Silva",
+    "email": "fulano.silva@email.com",
+    "password": "senhaSegura1",
+    "administrador": "false"
+  },
+  {
+    "nome": "Beltrana Souza",
+    "email": "beltrana.souza@email.com",
+    "password": "outraSenha3",
+    "administrador": "true"
+  },
+  {
+    "nome": "Ciclano Santos",
+    "email": "ciclano.santos@email.com",
+    "password": "senhaForte#5",
+    "administrador": "false"
+  },
+  {
+    "nome": "Joana Oliveira",
+    "email": "joana.oliveira@email.com",
+    "password": "joanaPwd",
+    "administrador": "false"
+  },
+  {
+    "nome": "Pedro Costa",
+    "email": "pedro.costa@email.com",
+    "password": "pedro1234",
+    "administrador": "false"
+  },
+  {
+    "nome": "Ana Lima",
+    "email": "ana.lima@email.com",
+    "password": "ana_pwd_9",
+    "administrador": "true"
+  },
+  {
+    "nome": "Rafaela Rocha",
+    "email": "rafaela.rocha@email.com",
+    "password": "rafaelaSenha",
+    "administrador": "false"
+  },
+  {
+    "nome": "Felipe Gomes",
+    "email": "felipe.gomes@email.com",
+    "password": "gomes_felipe",
+    "administrador": "false"
+  },
+  {
+    "nome": "Mariana Alves",
+    "email": "mariana.alves@email.com",
+    "password": "mariana_10",
+    "administrador": "false"
+  },
+  {
+    "nome": "Thiago Martins",
+    "email": "thiago.martins@email.com",
+    "password": "martinsThiago",
+    "administrador": "false"
+  },
+  {
+    "nome": "Carla Ferreira",
+    "email": "carla.ferreira@email.com",
+    "password": "carlaPwd@",
+    "administrador": "true"
+  },
+  {
+    "nome": "Gustavo Pires",
+    "email": "gustavo.pires@email.com",
+    "password": "senhaSegura123",
+    "administrador": "false"
+  },
+  {
+    "nome": "Fernanda Dias",
+    "email": "fernanda.dias@email.com",
+    "password": "diasFernanda",
+    "administrador": "false"
+  },
+  {
+    "nome": "Lucas Barros",
+    "email": "lucas.barros@email.com",
+    "password": "lucasBarros1",
+    "administrador": "false"
+  },
+  {
+    "nome": "Juliana Castro",
+    "email": "juliana.castro@email.com",
+    "password": "castro_juliana",
+    "administrador": "true"
+  },
+  {
+    "nome": "Gabriel Ribeiro",
+    "email": "gabriel.ribeiro@email.com",
+    "password": "gabriel_senha",
+    "administrador": "false"
+  },
+  {
+    "nome": "Patrícia Nunes",
+    "email": "patricia.nunes@email.com",
+    "password": "pat_nunes_pwd",
+    "administrador": "false"
+  },
+  {
+    "nome": "Eduardo Lopes",
+    "email": "eduardo.lopes@email.com",
+    "password": "lopesEduardo",
+    "administrador": "false"
+  },
+  {
+    "nome": "Amanda Santos",
+    "email": "amanda.santos@email.com",
+    "password": "amanda123",
+    "administrador": "false"
+  }
+]

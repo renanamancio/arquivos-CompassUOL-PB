@@ -1,0 +1,31 @@
+[
+  {
+    "nome": "Logitech MX Vertical",
+    "preco": "470",
+    "descricao": "Mouse",
+    "quantidade": "381"
+  },
+  {
+    "nome": "Teclado Mecânico HyperX Alloy",
+    "preco": 550,
+    "descricao": "Teclado para gamers",
+    "quantidade": 150
+  },
+  {
+    "nome": "Monitor Dell UltraSharp 27''",
+    "preco": 1800,
+    "descricao": "Monitor 4K com alta precisão de cores",
+    "quantidade": 50
+  },
+  {
+    "nome": "Fone de Ouvido Sony WH-1000XM5",
+    "preco": 1600,
+    "descricao": "Headphone com cancelamento de ruído",
+    "quantidade": 220
+  },
+  {
+    "nome": "Webcam Logitech C920",
+    "preco": 350,
+    "descricao": "Webcam Full HD para videoconferências",
+    "quantidade": 500
+  }

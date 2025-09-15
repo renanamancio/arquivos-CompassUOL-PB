@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-09-15T16:24:05.561533" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Usuarios" source="c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\test_usuarios.robot">
+<kw name="Setup Test" owner="resources" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.785223" level="INFO">Creating Session using : alias=serverest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>serverest</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-15T16:24:05.784904" elapsed="0.004945"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:05.784201" elapsed="0.006272"/>
+</kw>
+<test id="s1-t1" name="US001-CE1-CT1: Cadastro de usuário comum" line="7">
+<kw name="Gerar Email Randomico" owner="resources">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-09-15T16:24:05.793308" level="INFO">${random} = B5FD44TX</msg>
+<var>${random}</var>
+<arg>8</arg>
+<arg>[LETTERS][NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.792640" elapsed="0.000980"/>
+</kw>
+<return>
+<value>teste${random}@example.com</value>
+<status status="PASS" start="2025-09-15T16:24:05.793882" elapsed="0.000252"/>
+</return>
+<msg time="2025-09-15T16:24:05.794580" level="INFO">${email} = testeB5FD44TX@example.com</msg>
+<var>${email}</var>
+<status status="PASS" start="2025-09-15T16:24:05.791992" elapsed="0.003529"/>
+</kw>
+<kw name="Criar Usuario" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.801362" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.800386" elapsed="0.001247"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.803244" level="INFO">${data} = {'nome': 'Usuario Teste', 'email': 'testeB5FD44TX@example.com', 'password': 'teste123', 'administrador': 'true'}</msg>
+<var>${data}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.802078" elapsed="0.001437"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.840582" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '112'} 
+ body=b'{"nome": "Usuario Teste", "email": "testeB5FD44TX@example.com", "password": "teste123", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-15T16:24:05.841073" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Mon, 15 Sep 2025 19:24:05 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "QzWWQ2Etw4HTT22C"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:05.841496" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.803877" elapsed="0.037815"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:05.841945" elapsed="0.000215"/>
+</return>
+<msg time="2025-09-15T16:24:05.842613" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>Usuario Teste</arg>
+<arg>${email}</arg>
+<arg>teste123</arg>
+<arg>true</arg>
+<status status="PASS" start="2025-09-15T16:24:05.799350" elapsed="0.043482"/>
+</kw>
+<kw name="Verificar Response Sucesso" owner="resources">
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.851839" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.850391" elapsed="0.001957"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>sucesso</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.852776" elapsed="0.001242"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-15T16:24:05.849131" elapsed="0.005234"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.863793" level="INFO">${user_id} = QzWWQ2Etw4HTT22C</msg>
+<arg>${user_id}</arg>
+<arg>${response.json()}[_id]</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.862246" elapsed="0.001953"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:05.790848" elapsed="0.078152"/>
+</test>
+<test id="s1-t2" name="US001-CE2-CT2: Listar usuários" line="13">
+<kw name="Listar Usuarios" owner="resources">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.881763" level="INFO">GET Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-15T16:24:05.882264" level="INFO">GET Response : url=http://localhost:3000/usuarios 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '35360', 'Date': 'Mon, 15 Sep 2025 19:24:05 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 168,
+    "usuarios": [
+        {
+            "nome": "Usuario Alterado",
+            "email": "alterado20@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "0sZLYirwzhsmQ4Cl"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "fulano@qa.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz1"
+        },
+        {
+            "nome": "Renan",
+            "email": "renan5@gmail.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "30A82NawejHDw74v"
+        },
+        {
+            "nome": "Fulano 12",
+            "email": "fulano12@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "3XuX16PAeN0Cd4GK"
+        },
+        {
+            "nome": "Rafaela Rocha",
+            "email": "rafaela.rocha@email.com",
+            "password": "rafaelaSenha",
+            "administrador": "false",
+            "_id": "3k0g91OmE9MpYrLS"
+        },
+        {
+            "nome": "Renan",
+            "email": "renan1@gmail.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "4G0bQsqOgYGqryWw"
+        },
+        {
+            "nome": "Fulano 51",
+            "email": "fulano51@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "4lvUaYuf9Mna5unw"
+        },
+        {
+            "nome": "Renan",
+            "email": "renan4@gmail.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "55f2KVZLpu6uOAR5"
+        },
+        {
+            "nome": "Exemplo Admin",
+            "email": "admin@email.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "5C7NuRDSDeFDNvFV"
+        },
+        {
+            "nome": "Fulano 16",
+            "email": "fulano16@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "5pS1KdQfoPWhhtLo"
+        },
+        {
+            "nome": "Fulano 76",
+            "email": "fulano76@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "5si06YUYQ7y5mnmY"
+        },
+        {
+            "nome": "Usuário Teste65165",
+            "email": "usuario1789.teste@example.com",
+            "password": "teste123",
+            "administrador": "false",
+            "_id": "61ZGncNCdx0uaztX"
+        },
+        {
+            "nome": "Fulano 21",
+            "email": "fulano21@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "6VoCiuZIc2shDwwG"
+        },
+        {
+            "nome": "Fulano da Penha",
+            "email": "ex@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "6juSA4qD0O22wf9x"
+        },
+        {
+            "nome": "Fulano 9",
+            "email": "fulano9@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "7tLL62DBJ2fN1EDH"
+        },
+        {
+            "nome": "Fulano 36",
+            "email": "fulano36@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "8174CTPdwG4duGvD"
+        },
+        {
+            "nome": "Fulano 74",
+            "email": "fulano74@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "8RK6gGTgLF5Kz86U"
+        },
+        {
+            "nome": "Fulano 6",
+            "email": "fulano6@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "8uiv09c0J8EoCQlf"
+        },
+        {
+            "nome": "Fulano 98",
+            "email": "fulano98@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "9B9157NdLdzoN01U"
+        },
+        {
+            "nome": "Fulano 1",
+            "email": "fulano1@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "9BVhXTkLVwg18YNH"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "beltra@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "ALJi9jQwDVYM7Lz9"
+        },
+        {
+            "nome": "Fulano 19",
+            "email": "fulano19@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "AgM9hHMPuL9O0hbl"
+        },
+        {
+            "nome": "Fulano 85",
+            "email": "fulano85@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "AwS8KfnyJWVHg22v"
+        },
+        {
+            "nome": "Fulano 84",
+            "email": "fulano84@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "BHD1fJplJgrgPRi9"
+        },
+        {
+            "nome": "Usuario Teste1",
+            "email": "usuario1@dominio.com",
+            "password": "teste123",
+            "administrador": "false",
+            "_id": "BJAQQDLrH2QzICbq"
+        },
+        {
+            "nome": "Fulano 95",
+            "email": "fulano95@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "BXmS65ecg58vDbNg"
+        },
+        {
+            "nome": "Carla Ferreira",
+            "email": "carla.ferreira@email.com",
+            "password": "carlaPwd@",
+            "administrador": "true",
+            "_id": "Bv8k9Omj2GNc7gGr"
+        },
+        {
+            "nome": "Fulano 40",
+            "email": "fulano40@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "CQE1e8EZ3AupiG56"
+        },
+        {
+            "nome": "Fulano 14",
+            "email": "fulano14@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "CgmcwfcxbqrUcxNy"
+        },
+        {
+            "nome": "Fulano 31",
+            "email": "fulano31@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "D5PXDp4EDXYVNd7g"
+        },
+        {
+            "nome": "Fulano 97",
+            "email": "fulano97@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "DP9g7P2Co3Op7tE2"
+        },
+        {
+            "nome": "Fulano 28",
+            "email": "fulano28@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "DdtOlmZ8FD5jBO1F"
+        },
+        {
+            "nome": "Fulano 18",
+            "email": "fulano18@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "E4mROpBo2iNipfB7"
+        },
+        {
+            "nome": "Fulano 99",
+            "email": "fulano99@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "ECgz41NtXe3B5Bmm"
+        },
+        {
+            "nome": "Fulano",
+            "email": "alterado@qa.com.br",
+            "password": "teste",
+            "administrador": "false",
+            "_id": "EjNiHhCsE67aeC5q"
+        },
+        {
+            "nome": "Usuário Hotmail",
+            "email": "teste@hotmail.com",
+            "password": "senha123",
+            "administrador": "false",
+            "_id": "FXOqHSNdA0Dy3cUC"
+        },
+        {
+            "nome": "Beltrana Souza",
+            "email": "beltrana.souza@email.com",
+            "password": "outraSenha3",
+            "administrador": "true",
+            "_id": "Fd1gKrOmztm0q93M"
+        },
+        {
+            "nome": "Fulano 88",
+            "email": "fulano88@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "FlSOjJxaZoVzAfHU"
+        },
+        {
+            "nome": "Patrícia Nunes",
+            "email": "patricia.nunes@email.com",
+            "password": "pat_nunes_pwd",
+            "administrador": "false",
+            "_id": "GBc9uBVTrPiddvft"
+        },
+        {
+            "nome": "Renan",
+            "email": "renn1@gmail.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "Ggcohnd0eHO8XJ6h"
+        },
+        {
+            "nome": "Fulano 77",
+            "email": "fulano77@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "HH2NRb30uDM71GBm"
+        },
+        {
+            "nome": "Fulano 68",
+            "email": "fulano68@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "I36BtXoIX2L0rnvf"
+        },
+        {
+            "nome": "Usuário Senha Longa",
+            "email": "longa@example.com",
+            "password": "12345678901",
+            "administrador": "false",
+            "_id": "IESDKiAsYqOTWdUX"
+        },
+        {
+            "nome": "Fulano 15",
+            "email": "fulano15@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "IhQZqRqfs0qsA05h"
+        },
+        {
+            "nome": "Fulano 67",
+            "email": "fulano67@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "JBemO5r6MNuKicV2"
+        },
+        {
+            "nome": "Fulano 50",
+            "email": "fulano50@email.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "JGFmRd6qtvd4Wv0x"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "beltr@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "JI21l04fNgI3NWzZ"
+        },
+        {
+            "nome": "Ana Lima",
+            "email": "ana.lima@email.com",
+            ... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2025-09-15T16:24:05.883512" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.874464" elapsed="0.009307"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:05.884035" elapsed="0.000292"/>
+</return>
+<msg time="2025-09-15T16:24:05.884823" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2025-09-15T16:24:05.873720" elapsed="0.011378"/>
+</kw>
+<kw name="Verificar Response Lista" owner="resources">
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.897120" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.895935" elapsed="0.001604"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${response.json()}[quantidade] &gt;= 0</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.898053" elapsed="0.003386"/>
+</kw>
+<arg>${response}</arg>
+<status status="PASS" start="2025-09-15T16:24:05.895093" elapsed="0.006672"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:05.872707" elapsed="0.031311"/>
+</test>
+<test id="s1-t3" name="US001-CE2-CT3: Buscar usuário por ID" line="17">
+<kw name="Buscar Usuario Por ID" owner="resources">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.918158" level="INFO">GET Request : url=http://localhost:3000/usuarios/QzWWQ2Etw4HTT22C 
+ path_url=/usuarios/QzWWQ2Etw4HTT22C 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-15T16:24:05.918560" level="INFO">GET Response : url=http://localhost:3000/usuarios/QzWWQ2Etw4HTT22C 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '161', 'Date': 'Mon, 15 Sep 2025 19:24:05 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "nome": "Usuario Teste",
+    "email": "testeB5FD44TX@example.com",
+    "password": "teste123",
+    "administrador": "true",
+    "_id": "QzWWQ2Etw4HTT22C"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:05.918992" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}/${user_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.907139" elapsed="0.012069"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:05.919536" elapsed="0.000204"/>
+</return>
+<msg time="2025-09-15T16:24:05.920211" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<status status="PASS" start="2025-09-15T16:24:05.906350" elapsed="0.014146"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.924292" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.923182" elapsed="0.001470"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[_id]</arg>
+<arg>${user_id}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.927153" elapsed="0.001045"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:05.905270" elapsed="0.023390"/>
+</test>
+<test id="s1-t4" name="US001-CE3-CT1: Atualizar usuário existente" line="22">
+<kw name="Gerar Email Randomico" owner="resources">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-09-15T16:24:05.931655" level="INFO">${random} = 6MXmjlna</msg>
+<var>${random}</var>
+<arg>8</arg>
+<arg>[LETTERS][NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.931143" elapsed="0.000919"/>
+</kw>
+<return>
+<value>teste${random}@example.com</value>
+<status status="PASS" start="2025-09-15T16:24:05.932406" elapsed="0.000256"/>
+</return>
+<msg time="2025-09-15T16:24:05.933307" level="INFO">${novo_email} = teste6MXmjlna@example.com</msg>
+<var>${novo_email}</var>
+<status status="PASS" start="2025-09-15T16:24:05.930565" elapsed="0.003046"/>
+</kw>
+<kw name="Atualizar Usuario" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.936646" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.935490" elapsed="0.001390"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.939037" level="INFO">${data} = {'nome': 'Usuario Atualizado', 'email': 'teste6MXmjlna@example.com', 'password': 'novasenha', 'administrador': 'true'}</msg>
+<var>${data}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.937418" elapsed="0.001946"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.945009" level="INFO">PUT Request : url=http://localhost:3000/usuarios/QzWWQ2Etw4HTT22C 
+ path_url=/usuarios/QzWWQ2Etw4HTT22C 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '118'} 
+ body=b'{"nome": "Usuario Atualizado", "email": "teste6MXmjlna@example.com", "password": "novasenha", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-15T16:24:05.945461" level="INFO">PUT Response : url=http://localhost:3000/usuarios/QzWWQ2Etw4HTT22C 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'Date': 'Mon, 15 Sep 2025 19:24:05 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Registro alterado com sucesso"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:05.945774" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}/${user_id}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.939739" elapsed="0.006259"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:05.946289" elapsed="0.000134"/>
+</return>
+<msg time="2025-09-15T16:24:05.946654" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<arg>Usuario Atualizado</arg>
+<arg>${novo_email}</arg>
+<arg>novasenha</arg>
+<arg>true</arg>
+<status status="PASS" start="2025-09-15T16:24:05.934545" elapsed="0.012294"/>
+</kw>
+<kw name="Verificar Response Sucesso" owner="resources">
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.950681" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-09-15T16:24:05.951157" level="FAIL">200 != 201</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="FAIL" start="2025-09-15T16:24:05.949476" elapsed="0.003381">200 != 201</status>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>sucesso</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-09-15T16:24:05.953155" elapsed="0.000117"/>
+</kw>
+<arg>${response}</arg>
+<status status="FAIL" start="2025-09-15T16:24:05.948510" elapsed="0.004952">200 != 201</status>
+</kw>
+<status status="FAIL" start="2025-09-15T16:24:05.929530" elapsed="0.024445">200 != 201</status>
+</test>
+<test id="s1-t5" name="US001-CE4-CT1: Excluir usuário" line="27">
+<kw name="Excluir Usuario" owner="resources">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.964297" level="INFO">DELETE Request : url=http://localhost:3000/usuarios/QzWWQ2Etw4HTT22C 
+ path_url=/usuarios/QzWWQ2Etw4HTT22C 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-09-15T16:24:05.964760" level="INFO">DELETE Response : url=http://localhost:3000/usuarios/QzWWQ2Etw4HTT22C 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '51', 'Date': 'Mon, 15 Sep 2025 19:24:05 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Registro excluído com sucesso"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:05.965423" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}/${user_id}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.959253" elapsed="0.006304"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:05.965809" elapsed="0.000191"/>
+</return>
+<msg time="2025-09-15T16:24:05.966406" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<status status="PASS" start="2025-09-15T16:24:05.958760" elapsed="0.007870"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.969025" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.967933" elapsed="0.001465"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>sucesso</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.970644" elapsed="0.000668"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:05.957713" elapsed="0.015609"/>
+</test>
+<test id="s1-t6" name="US001-CE1-CT3: Tentativa de cadastro com e-mail duplicado" line="32">
+<kw name="Gerar Email Randomico" owner="resources">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-09-15T16:24:05.976149" level="INFO">${random} = mgmEskll</msg>
+<var>${random}</var>
+<arg>8</arg>
+<arg>[LETTERS][NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.975824" elapsed="0.000458"/>
+</kw>
+<return>
+<value>teste${random}@example.com</value>
+<status status="PASS" start="2025-09-15T16:24:05.976404" elapsed="0.000094"/>
+</return>
+<msg time="2025-09-15T16:24:05.976694" level="INFO">${email} = testemgmEskll@example.com</msg>
+<var>${email}</var>
+<status status="PASS" start="2025-09-15T16:24:05.975470" elapsed="0.001332"/>
+</kw>
+<kw name="Criar Usuario" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.978057" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.977702" elapsed="0.000476"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.978757" level="INFO">${data} = {'nome': 'Usuario 1', 'email': 'testemgmEskll@example.com', 'password': 'senha123', 'administrador': 'false'}</msg>
+<var>${data}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.978369" elapsed="0.000501"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:05.987073" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '109'} 
+ body=b'{"nome": "Usuario 1", "email": "testemgmEskll@example.com", "password": "senha123", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-15T16:24:05.987482" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Mon, 15 Sep 2025 19:24:05 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "8V7Bt6mD8ZGo6ClI"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:05.987963" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.979054" elapsed="0.009136"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:05.988449" elapsed="0.000220"/>
+</return>
+<msg time="2025-09-15T16:24:05.989123" level="INFO">${response1} = &lt;Response [201]&gt;</msg>
+<var>${response1}</var>
+<arg>Usuario 1</arg>
+<arg>${email}</arg>
+<arg>senha123</arg>
+<arg>false</arg>
+<status status="PASS" start="2025-09-15T16:24:05.977278" elapsed="0.012078"/>
+</kw>
+<kw name="Verificar Response Sucesso" owner="resources">
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.994207" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.993158" elapsed="0.001434"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>sucesso</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.994810" elapsed="0.000650"/>
+</kw>
+<arg>${response1}</arg>
+<status status="PASS" start="2025-09-15T16:24:05.992318" elapsed="0.003301"/>
+</kw>
+<kw name="Criar Usuario" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.998540" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.997780" elapsed="0.000910"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:05.999797" level="INFO">${data} = {'nome': 'Usuario 2', 'email': 'testemgmEskll@example.com', 'password': 'senha456', 'administrador': 'true'}</msg>
+<var>${data}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:05.998944" elapsed="0.001157"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:06.006772" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '108'} 
+ body=b'{"nome": "Usuario 2", "email": "testemgmEskll@example.com", "password": "senha456", "administrador": "true"}' 
+ </msg>
+<msg time="2025-09-15T16:24:06.007228" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '53', 'Date': 'Mon, 15 Sep 2025 19:24:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Este email já está sendo usado"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:06.007681" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: http://localhost:3000/usuarios</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-15T16:24:06.000502" elapsed="0.015900">HTTPError: 400 Client Error: Bad Request for url: http://localhost:3000/usuarios</status>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-09-15T16:24:06.016827" elapsed="0.000187"/>
+</return>
+<var>${response2}</var>
+<arg>Usuario 2</arg>
+<arg>${email}</arg>
+<arg>senha456</arg>
+<arg>true</arg>
+<status status="FAIL" start="2025-09-15T16:24:05.996613" elapsed="0.020852">HTTPError: 400 Client Error: Bad Request for url: http://localhost:3000/usuarios</status>
+</kw>
+<kw name="Verificar Response Conflito" owner="resources">
+<arg>${response2}</arg>
+<status status="NOT RUN" start="2025-09-15T16:24:06.029819" elapsed="0.000678"/>
+</kw>
+<status status="FAIL" start="2025-09-15T16:24:05.974326" elapsed="0.065192">HTTPError: 400 Client Error: Bad Request for url: http://localhost:3000/usuarios</status>
+</test>
+<test id="s1-t7" name="US001-CE3-CT3: Criação de usuário via PUT" line="41">
+<kw name="Gerar Email Randomico" owner="resources">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-09-15T16:24:06.065934" level="INFO">${random} = ZkukuEhN</msg>
+<var>${random}</var>
+<arg>8</arg>
+<arg>[LETTERS][NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.065138" elapsed="0.001133"/>
+</kw>
+<return>
+<value>teste${random}@example.com</value>
+<status status="PASS" start="2025-09-15T16:24:06.066577" elapsed="0.000205"/>
+</return>
+<msg time="2025-09-15T16:24:06.067233" level="INFO">${email} = testeZkukuEhN@example.com</msg>
+<var>${email}</var>
+<status status="PASS" start="2025-09-15T16:24:06.064114" elapsed="0.003355"/>
+</kw>
+<kw name="Atualizar Usuario" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.079271" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.078585" elapsed="0.000996"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.081576" level="INFO">${data} = {'nome': 'Usuario PUT', 'email': 'testeZkukuEhN@example.com', 'password': 'put123', 'administrador': 'false'}</msg>
+<var>${data}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.080419" elapsed="0.001445"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:06.089961" level="INFO">PUT Request : url=http://localhost:3000/usuarios/123abc 
+ path_url=/usuarios/123abc 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '109'} 
+ body=b'{"nome": "Usuario PUT", "email": "testeZkukuEhN@example.com", "password": "put123", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-15T16:24:06.090367" level="INFO">PUT Response : url=http://localhost:3000/usuarios/123abc 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Mon, 15 Sep 2025 19:24:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "kYhk6hT0RNbJAQNF"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:06.090731" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}/${user_id}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.082365" elapsed="0.008568"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:06.091166" elapsed="0.000177"/>
+</return>
+<msg time="2025-09-15T16:24:06.091719" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>123abc</arg>
+<arg>Usuario PUT</arg>
+<arg>${email}</arg>
+<arg>put123</arg>
+<arg>false</arg>
+<status status="PASS" start="2025-09-15T16:24:06.077412" elapsed="0.014535"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.109984" level="INFO">Response PUT: 201 - {
+    "message": "Cadastro realizado com sucesso",
+    "_id": "kYhk6hT0RNbJAQNF"
+}</msg>
+<arg>Response PUT: ${response.status_code} - ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.107114" elapsed="0.003256"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:06.062416" elapsed="0.053364"/>
+</test>
+<test id="s1-t8" name="US001-CE4-CT3: Tentativa de exclusão de usuário com carrinho" line="46">
+<kw name="Gerar Email Randomico" owner="resources">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-09-15T16:24:06.138978" level="INFO">${random} = jmzjmOku</msg>
+<var>${random}</var>
+<arg>8</arg>
+<arg>[LETTERS][NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.138316" elapsed="0.000976"/>
+</kw>
+<return>
+<value>teste${random}@example.com</value>
+<status status="PASS" start="2025-09-15T16:24:06.139677" elapsed="0.000331"/>
+</return>
+<msg time="2025-09-15T16:24:06.140676" level="INFO">${email} = testejmzjmOku@example.com</msg>
+<var>${email}</var>
+<status status="PASS" start="2025-09-15T16:24:06.137615" elapsed="0.003358"/>
+</kw>
+<kw name="Criar Usuario" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.147308" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.145697" elapsed="0.001910"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.149853" level="INFO">${data} = {'nome': 'Usuario Carrinho', 'email': 'testejmzjmOku@example.com', 'password': 'senha123', 'administrador': 'false'}</msg>
+<var>${data}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.148627" elapsed="0.001554"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:06.158599" level="INFO">POST Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '116'} 
+ body=b'{"nome": "Usuario Carrinho", "email": "testejmzjmOku@example.com", "password": "senha123", "administrador": "false"}' 
+ </msg>
+<msg time="2025-09-15T16:24:06.159068" level="INFO">POST Response : url=http://localhost:3000/usuarios 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Mon, 15 Sep 2025 19:24:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "ftk2VlGRiGnjtsh3"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:06.159536" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${USERS_ENDPOINT}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.150655" elapsed="0.009148"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-15T16:24:06.160117" elapsed="0.000241"/>
+</return>
+<msg time="2025-09-15T16:24:06.160830" level="INFO">${response_user} = &lt;Response [201]&gt;</msg>
+<var>${response_user}</var>
+<arg>Usuario Carrinho</arg>
+<arg>${email}</arg>
+<arg>senha123</arg>
+<arg>false</arg>
+<status status="PASS" start="2025-09-15T16:24:06.144234" elapsed="0.016878"/>
+</kw>
+<kw name="Verificar Response Sucesso" owner="resources">
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.174854" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.173441" elapsed="0.001746"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>sucesso</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.175539" elapsed="0.001140"/>
+</kw>
+<arg>${response_user}</arg>
+<status status="PASS" start="2025-09-15T16:24:06.171908" elapsed="0.005060"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.183039" level="INFO">${user_id_cart} = ftk2VlGRiGnjtsh3</msg>
+<var>${user_id_cart}</var>
+<arg>${response_user.json()}[_id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.180340" elapsed="0.002992"/>
+</kw>
+<kw name="Criar Carrinho" owner="resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.193133" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=${CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.192405" elapsed="0.001013"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-15T16:24:06.195117" level="INFO">${data} = {'idUsuario': 'ftk2VlGRiGnjtsh3', 'produtos': []}</msg>
+<var>${data}</var>
+<arg>idUsuario=${user_id}</arg>
+<arg>produtos=@{EMPTY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-15T16:24:06.193794" elapsed="0.001583"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:06.202161" level="INFO">POST Request : url=http://localhost:3000/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '49'} 
+ body=b'{"idUsuario": "ftk2VlGRiGnjtsh3", "produtos": []}' 
+ </msg>
+<msg time="2025-09-15T16:24:06.202569" level="INFO">POST Response : url=http://localhost:3000/carrinhos 
+ status=401, reason=Unauthorized 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '103', 'Date': 'Mon, 15 Sep 2025 19:24:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais"
+} 
+ </msg>
+<msg time="2025-09-15T16:24:06.203011" level="FAIL">HTTPError: 401 Client Error: Unauthorized for url: http://localhost:3000/carrinhos</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>${CART_ENDPOINT}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-15T16:24:06.195819" elapsed="0.010236">HTTPError: 401 Client Error: Unauthorized for url: http://localhost:3000/carrinhos</status>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-09-15T16:24:06.206424" elapsed="0.000178"/>
+</return>
+<var>${response_cart}</var>
+<arg>${user_id_cart}</arg>
+<status status="FAIL" start="2025-09-15T16:24:06.191501" elapsed="0.015437">HTTPError: 401 Client Error: Unauthorized for url: http://localhost:3000/carrinhos</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Carrinho criado: ${response_cart.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-09-15T16:24:06.219488" elapsed="0.000283"/>
+</kw>
+<kw name="Excluir Usuario" owner="resources">
+<var>${response_delete}</var>
+<arg>${user_id_cart}</arg>
+<status status="NOT RUN" start="2025-09-15T16:24:06.232607" elapsed="0.000407"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Exclusão: ${response_delete.status_code} - ${response_delete.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-09-15T16:24:06.240577" elapsed="0.000259"/>
+</kw>
+<status status="FAIL" start="2025-09-15T16:24:06.135210" elapsed="0.110288">HTTPError: 401 Client Error: Unauthorized for url: http://localhost:3000/carrinhos</status>
+</test>
+<kw name="Teardown Test" owner="resources" type="TEARDOWN">
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2025-09-15T16:24:06.267745" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-09-15T16:24:06.267410" elapsed="0.000721"/>
+</kw>
+<status status="PASS" start="2025-09-15T16:24:06.266833" elapsed="0.001590"/>
+</kw>
+<status status="FAIL" start="2025-09-15T16:24:05.567338" elapsed="0.701259"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Usuarios" id="s1" pass="5" fail="3" skip="0">Test Usuarios</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-09-15T16:24:05.611301" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 25: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-09-15T16:24:05.611976" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 29: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-09-15T16:24:05.612838" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 34: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-09-15T16:24:05.614006" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 41: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-09-15T16:24:05.615044" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 46: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-09-15T16:24:05.615733" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 53: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-09-15T16:24:05.616516" level="WARN">Error in file 'c:\Users\Ideapad\Documents\Compass UOL\SPRINT-6\SERVEREST-TESTE\ROBOT\Módulo Usuários\resources.robot' on line 57: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+</errors>
+</robot>

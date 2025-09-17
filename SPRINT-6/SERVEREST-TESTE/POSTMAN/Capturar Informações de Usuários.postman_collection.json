@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "642c4bcb-0a66-4308-a2c0-e62e8f1e872a",
+		"name": "Capturar Informações de Usuários",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://www.postman.com/renan-henriqueba-6059498/workspace/api-serverest/collection/47434408-642c4bcb-0a66-4308-a2c0-e62e8f1e872a?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "Listar Usuários",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseData = pm.response.json();\r",
+							"\r",
+							"const primeiroUsuarioId = responseData.usuarios[0]._id;\r",
+							"\r",
+							"pm.globals.set(\"primeiroUsuarioId\", primeiroUsuarioId);\r",
+							"\r",
+							"const segundoUsuarioEmail = responseData.usuarios[1].email;\r",
+							"\r",
+							"pm.globals.set(\"segundoUsuarioEmail\", segundoUsuarioEmail);\r",
+							"\r",
+							"const terceiroUsuarioId = responseData.usuarios[2]._id;\r",
+							"\r",
+							"pm.globals.set(\"terceiroUsuarioId\", terceiroUsuarioId);\r",
+							"\r",
+							"const quartoUsuarioId = responseData.usuarios[3]._id;\r",
+							"\r",
+							"pm.globals.set(\"quartoUsuarioId\", quartoUsuarioId);\r",
+							"\r",
+							"const quintoUsuarioId = responseData.usuarios[4]._id;\r",
+							"\r",
+							"pm.globals.set(\"quintoUsuarioId\", quintoUsuarioId);\r",
+							"\r",
+							"const sextoUsuarioId = responseData.usuarios[5]._id;\r",
+							"\r",
+							"pm.globals.set(\"sextoUsuarioId\", sextoUsuarioId);\r",
+							"\r",
+							"let adminFound = false;\r",
+							"let usuarioConsumidorCount = 0;\r",
+							"\r",
+							"if (responseData && responseData.usuarios && responseData.usuarios.length >= 7) {\r",
+							"    for (let i = 6; i < responseData.usuarios.length; i++) {\r",
+							"        const usuario = responseData.usuarios[i];\r",
+							"\r",
+							"        if (usuario.administrador === \"true\" && !adminFound) {\r",
+							"            pm.globals.set(\"admin_id\", usuario._id);\r",
+							"            pm.globals.set(\"admin_email\", usuario.email);\r",
+							"            pm.globals.set(\"admin_password\", usuario.password);\r",
+							"            adminFound = true;\r",
+							"        }\r",
+							"\r",
+							"        if (usuario.administrador === \"false\" && usuarioConsumidorCount < 4) {\r",
+							"            usuarioConsumidorCount++;\r",
+							"            pm.globals.set(`usuarioConsumidor${usuarioConsumidorCount}_id`, usuario._id);\r",
+							"            pm.globals.set(`usuarioConsumidor${usuarioConsumidorCount}_email`, usuario.email);\r",
+							"            pm.globals.set(`usuarioConsumidor${usuarioConsumidorCount}_password`, usuario.password);\r",
+							"        }\r",
+							"\r",
+							"        if (adminFound && usuarioConsumidorCount === 4) {\r",
+							"            break;\r",
+							"        }\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

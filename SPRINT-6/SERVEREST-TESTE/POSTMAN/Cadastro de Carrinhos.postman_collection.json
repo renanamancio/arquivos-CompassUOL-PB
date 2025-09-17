@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "b5c537aa-5ce0-46d7-a531-ddb8759f8ec6",
+		"name": "Cadastro de Carrinhos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47434408",
+		"_collection_link": "https://www.postman.com/renan-henriqueba-6059498/workspace/api-serverest/collection/47434408-b5c537aa-5ce0-46d7-a531-ddb8759f8ec6?action=share&source=collection_link&creator=47434408"
+	},
+	"item": [
+		{
+			"name": "Cadastrar Carrinho 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenUsuario1}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{produto1_id}}\",\r\n      \"quantidade\": 2\r\n    },\r\n    {\r\n      \"idProduto\": \"{{produto2_id}}\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/carrinhos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"carrinhos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Carrinho 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenUsuario2}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{produto2_id}}\",\r\n      \"quantidade\": 2\r\n    },\r\n    {\r\n      \"idProduto\": \"{{produto3_id}}\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/carrinhos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"carrinhos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Carrinho 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenUsuario3}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{produto3_id}}\",\r\n      \"quantidade\": 2\r\n    },\r\n    {\r\n      \"idProduto\": \"{{produto4_id}}\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/carrinhos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"carrinhos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

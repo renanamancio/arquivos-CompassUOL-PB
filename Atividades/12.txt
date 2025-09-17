@@ -1,0 +1,4 @@
+- A massa de dados de produtos não aceita requisições em coletivo pelo collection runner. Necessário cadastrar um por um.
+
+-Status de alteração de usuário está errado. na documentação consta 200, mas na requisição retorna 201.
+

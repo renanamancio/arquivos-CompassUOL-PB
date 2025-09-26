@@ -1,0 +1,5 @@
+    # doc = {
+    #     'name': name,
+    #     'email': email,
+    #     'password': password
+    # }

@@ -1,0 +1,24 @@
+{
+    "create": {
+        "user":{
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "password": "teste123"
+        },
+        "task":{
+            "name": "Criar uma nova versão do Ipod",
+            "tags": ["ios", "music", "ipod"]
+        }
+    },
+    "duplicate": {
+        "user":{
+            "name": "Beatriz",
+            "email": "beatriz@example.com",
+            "password": "teste123"
+        },
+        "task":{
+            "name": "Criar uma nova versão do Ipod",
+            "tags": []
+        }
+    }
+}
